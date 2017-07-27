@@ -31,6 +31,11 @@ public interface Picture {
 	 */
 	void set(int x, int y, Color color);
 
+	/**
+	 * Get a buffered image compatible with this representation
+	 * 
+	 * @return a Buffered Image view of this image
+	 */
 	BufferedImage getImage();
 
 }

@@ -7,17 +7,17 @@ public class EnergyCalculator {
 	// maximal energy = 3*(255^2)
 	private final double BORDER_ENERGY = 195075;
 
-	public double[][] energy(Picture picture) {
+	public double[][] computeEnergy(Picture picture) {
 		double[][] energy = new double[picture.getWidth()][picture.getHeight()];
 		for (int j = 0; j < picture.getHeight(); j++) {
 			for (int i = 0; i < picture.getWidth(); i++) {
-				energy[i][j] = energy(picture, i, j);
+				energy[i][j] = computeEnergy(picture, i, j);
 			}
 		}
 		return energy;
 	}
 	
-	private double energy(Picture picture, int x, int y) {
+	private double computeEnergy(Picture picture, int x, int y) {
 		if (isBorder(x, y, picture)) {
 			return BORDER_ENERGY;
 		}
