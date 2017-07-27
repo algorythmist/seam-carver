@@ -27,7 +27,9 @@ public class EnergyCalculatorTest {
 			assertEquals(195075, energy[i][9], 0.001);
 		}
 		
-		
+		Picture energyPicture = EnergyCalculator.toPicture(energy);
+		assertEquals(10, energyPicture.getHeight());
+		assertEquals(10, energyPicture.getWidth());
 	}
 
 }

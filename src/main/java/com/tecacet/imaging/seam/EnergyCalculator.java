@@ -41,5 +41,38 @@ public class EnergyCalculator {
 		return x == 0 || x == picture.getWidth() - 1 || y == 0 || y == picture.getHeight() - 1;
 	}
 
+	/**
+	 * Convert a double matrix of energy values into a normalized grayscale picture. 
+	 * Values are normalized by the maximum grayscale value
+	 * 
+	 * @param energy the energy matrix
+	 * @return
+	 */
+	public static Picture toPicture(double[][] energy) {
+		
+		int width = energy.length;
+		int height = energy[0].length;
+
+		Picture p = new BufferedImagePicture(width, height);
+
+		double maxVal = 0;
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				if (energy[i][j] > maxVal) {
+					maxVal = energy[i][j];
+				}
+			}
+		}
+		if (maxVal == 0) {
+			return p; // return black picture
+		}
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				float normalizedGrayValue = (float) energy[i][j] / (float) maxVal;
+				p.set(i, j, new Color(normalizedGrayValue, normalizedGrayValue, normalizedGrayValue));
+			}
+		}
+		return p;
+	}
 	
 }
