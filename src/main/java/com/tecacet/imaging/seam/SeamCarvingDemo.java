@@ -11,7 +11,6 @@ import javax.imageio.ImageIO;
 public class SeamCarvingDemo {
 
 	private final EnergyCalculator energyCalculator = new EnergyCalculator();
-	
 
 	public void runDemo(String filename, int removeColumns, int removeRows) throws IOException {
 		// load in a picture
@@ -22,37 +21,37 @@ public class SeamCarvingDemo {
 		BufferedImage energyImage = EnergyCalculator.toBufferedImage(energy);
 		ImageIO.write(energyImage, "png", new File("energy.png"));
 
-		//resize the image with seam carving
+		// resize the image with seam carving
 		long startTime = System.currentTimeMillis();
 		SeamCarver seamCarver = new SeamCarver();
 		Picture output = seamCarver.resize(picture, removeColumns, removeRows);
 		long endTime = System.currentTimeMillis();
 		System.out.printf("Time to resize = %d milliseconds.\n", (endTime - startTime));
 		ImageIO.write(output.getImage(), "png", new File("compressed.png"));
-		
-		//Now create a picture with the seams showing
+			
+		// Now create a picture with the seams showing
 		Picture withSeams = addSeams(seamCarver, output);
 		ImageIO.write(withSeams.getImage(), "png", new File("with_seams.png"));
 	}
-	
+
 	private Picture addSeams(SeamCarver seamCarver, final Picture picture) {
 		Picture pictureWithSeams = picture;
 		Stack<int[]> horizontalSeams = seamCarver.getHorizontalSeams();
-		for (int i = 0; i < horizontalSeams.size(); i++) {
+		while (!horizontalSeams.isEmpty()) {
 			int[] seam = horizontalSeams.pop();
 			pictureWithSeams = seamCarver.addHorizontalSeam(pictureWithSeams, seam, Color.BLUE);
 		}
 		Stack<int[]> verticalSeams = seamCarver.getVerticalSeams();
-		for (int i = 0; i < verticalSeams.size(); i++) {
+		while (!verticalSeams.isEmpty()) {
 			int[] seam = verticalSeams.pop();
 			pictureWithSeams = seamCarver.addVerticalSeam(pictureWithSeams, seam, Color.BLUE);
 		}
-		
+
 		return pictureWithSeams;
 	}
 
 	public static void main(String[] args) throws IOException {
-		new SeamCarvingDemo().runDemo("apple.jpg", 50, 13);
+		new SeamCarvingDemo().runDemo("apple.jpg", 80, 0);
 
 	}
 }
