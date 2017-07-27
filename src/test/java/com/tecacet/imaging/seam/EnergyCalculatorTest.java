@@ -2,6 +2,7 @@ package com.tecacet.imaging.seam;
 
 import static org.junit.Assert.assertEquals;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import org.junit.Test;
@@ -27,7 +28,7 @@ public class EnergyCalculatorTest {
 			assertEquals(195075, energy[i][9], 0.001);
 		}
 		
-		Picture energyPicture = EnergyCalculator.toPicture(energy);
+		BufferedImage energyPicture = EnergyCalculator.toBufferedImage(energy);
 		assertEquals(10, energyPicture.getHeight());
 		assertEquals(10, energyPicture.getWidth());
 	}

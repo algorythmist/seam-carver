@@ -22,8 +22,12 @@ public class SeamCarverTest {
 		
 		Stack<int[]> verticalSeams = seamCarver.getVerticalSeams();
 		assertEquals(50, verticalSeams.size());
+		int[] seam = verticalSeams.peek();
+		assertEquals(263, seam.length);
 		Stack<int[]> horizontalSeams = seamCarver.getHorizontalSeams();
 		assertEquals(13, horizontalSeams.size());
+		seam = horizontalSeams.peek();
+		assertEquals(300, seam.length);
 		
 	}
 

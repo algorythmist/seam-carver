@@ -1,6 +1,7 @@
 package com.tecacet.imaging.seam;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 
 public class EnergyCalculator {
 
@@ -48,12 +49,12 @@ public class EnergyCalculator {
 	 * @param energy the energy matrix
 	 * @return
 	 */
-	public static Picture toPicture(double[][] energy) {
+	public static BufferedImage toBufferedImage(double[][] energy) {
 		
 		int width = energy.length;
 		int height = energy[0].length;
 
-		Picture p = new BufferedImagePicture(width, height);
+		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
 		double maxVal = 0;
 		for (int i = 0; i < width; i++) {
@@ -64,15 +65,17 @@ public class EnergyCalculator {
 			}
 		}
 		if (maxVal == 0) {
-			return p; // return black picture
+			return image; // return black picture
 		}
+		
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
 				float normalizedGrayValue = (float) energy[i][j] / (float) maxVal;
-				p.set(i, j, new Color(normalizedGrayValue, normalizedGrayValue, normalizedGrayValue));
+				Color color =  new Color(normalizedGrayValue, normalizedGrayValue, normalizedGrayValue);
+				image.setRGB(i,  j, color.getRGB());
 			}
 		}
-		return p;
+		return image;
 	}
 	
 }
