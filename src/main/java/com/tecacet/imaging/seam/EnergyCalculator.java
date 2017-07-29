@@ -56,14 +56,7 @@ public class EnergyCalculator {
 
 		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
-		double maxVal = 0;
-		for (int i = 0; i < width; i++) {
-			for (int j = 0; j < height; j++) {
-				if (energy[i][j] > maxVal) {
-					maxVal = energy[i][j];
-				}
-			}
-		}
+		double maxVal = calculateMaximumValue(energy, width, height);
 		if (maxVal == 0) {
 			return image; // return black picture
 		}
@@ -76,6 +69,18 @@ public class EnergyCalculator {
 			}
 		}
 		return image;
+	}
+
+	private static double calculateMaximumValue(double[][] energy, int width, int height) {
+		double maxVal = 0;
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				if (energy[i][j] > maxVal) {
+					maxVal = energy[i][j];
+				}
+			}
+		}
+		return maxVal;
 	}
 	
 }

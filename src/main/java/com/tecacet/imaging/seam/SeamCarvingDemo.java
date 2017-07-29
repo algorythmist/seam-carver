@@ -28,7 +28,7 @@ public class SeamCarvingDemo {
 		long endTime = System.currentTimeMillis();
 		System.out.printf("Time to resize = %d milliseconds.\n", (endTime - startTime));
 		ImageIO.write(output.getImage(), "png", new File("compressed.png"));
-			
+
 		// Now create a picture with the seams showing
 		Picture withSeams = addSeams(seamCarver, output);
 		ImageIO.write(withSeams.getImage(), "png", new File("with_seams.png"));
@@ -51,7 +51,7 @@ public class SeamCarvingDemo {
 	}
 
 	public static void main(String[] args) throws IOException {
-		new SeamCarvingDemo().runDemo("apple.jpg", 80, 0);
+		new SeamCarvingDemo().runDemo("apple.jpg", 80, 13);
 
 	}
 }
